@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gabby and Gabby Love Album</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-image: url('bgbg.png'); /* Path to your love-themed background image */
+        background-size: cover;
+        background-position: center;
+        padding: 20px; /* Add some padding to make content more readable */
+        color: white; /* Set text color to white for better visibility */
+    }
+    h1 {
+        color: #e91e63;
+    }
+    .album-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .album-item {
+        margin: 10px;
+    }
+    .media {
+        display: none;
+    }
+    p {
+        color: #ffffff; /* Set paragraph text color to white */
+    }
+    button {
+        background-color: #e91e63; /* Pink button color */
+        color: white; /* White text color */
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+    button:hover {
+        background-color: #ff6699; /* Lighter pink on hover */
+    }
+</style>
+</head>
+<body>
+
+<h1>Gabby and Gabby Love Album</h1>
+
+<div class="album-container" id="albumContainer">
+    <!-- Album items will be added dynamically here -->
+</div>
+
+<script>
+    // Data for the love album
+    const loveAlbum = [
+        { title: "Our First Date", image: "5.jpg", description: "The day we first met and went out together." },
+        { title: "Memorable Trip", image: "3.jpeg", description: "That unforgettable journey where we made countless memories." },
+        { title: "Special Moments", image: "4.jpeg", description: "Every smile that she do is my Special moment." },
+        { title: "Masungit na gerlpren", image: "6.jpg", description: "Mataray everytime and everywhere." },
+        { title: "Party in Elyu", image: "7.jpeg", description: "My Party Buddy" },
+        { title: "hindi scripted na pic", image: "8.jpeg", description: "Thanks Juleana Dominyque Mondol." },
+        { title: "SM Baguio", image: "9.jpeg", description: "Baby ko na Graduating." },
+        { title: "Wacky", image: "11.jpeg", description: "Serious Face" },
+        { title: "Nak picturan kita", image: "12.jpeg", description: "Habang nag shoshopping si chrissha sa purple na store" },
+        { title: "Girlfriend slurpin", image: "13.jpeg", description: "SHCLURPPPPPP!" },
+        { title: "Pre-Game HYPHY", image: "14.jpeg", description: "yung malapit sa caltex" },
+        { title: "Girlfriend Can't Sleep", image: "15.jpeg", description: "Boyfriend snore snore." },
+        { title: "Make-up Game", image: "16.jpeg", description: "haha titi sa mukha" },
+        { title: "Girlfriend Sleeping", image: "17.jpeg", description: "Di siguro ako nahilik kaya nakatulog." },
+        { title: "Rare Suman Girlfriend", image: "18.jpeg", description: "Mine Suman" },
+        { title: "GIRLFRIEND IN CAVITE?!", image: "19.jpeg", description: "WHAAAAAAAAATTTTTT?" },
+        { title: "trip to pampanga", image: "21.jpeg", description: "First time in pampanga!" },
+        { title: "Tiktok Trend", video: "1.mp4", description: "Smile hanggang sa pagtulog" },
+        { title: "First Tiktok", video: "2.mp4", description: "Kilig me hihi" },
+        { title: "Nang-iingit na Girlfriend", video: "3.mp4", description: "Flexin!" },
+        { title: "Vid of GF Nagtatampo", video: "4.mp4", description: "bilis mag salita, bilis din magtampo." },
+        { title: "Coffee date with her friends", video: "5.mp4", description: "one of the gals" },
+        { title: "Dash daw", video: "6.mp4", description: "Jowa ko ay isang taga pagtanggol ng mundo." },
+        { title: "doing her Lab Activity", video: "7.mp4", description: "Doing her Lab Act kasi Lab ko siya yieee ily14372890392." },  
+        { title: "low energy dance vid namin", video: "8.mp4", description: "kinabahan siya unti." },  
+        { title: "loh keneleg", video: "9.mp4", description: "ngiti siya e" },  
+        { title: "tiktok then tampo", video: "10.mp4", description: "sino ba kasi nag pauso niyan" },  
+        { title: "taking care of her while she review", video: "11.mp4", description: "I love her." },  
+        { title: "reviewlog", video: "12.mp4", description: "gising ibibili mo pa ko ng supra" },  
+        { title: "meet tangy", video: "13.mp4", description: "mas malaki pa sakanya" },   
+    ];
+
+    // Function to display album items
+    function displayAlbum() {
+        const albumContainer = document.getElementById('albumContainer');
+        let albumHTML = '';
+        loveAlbum.forEach((item, index) => {
+            if (item.image) {
+                albumHTML += `
+                    <div class="album-item">
+                        <h2>${item.title}</h2>
+                        <button onclick="toggleMedia(${index})">Show Picture</button>
+                        <img class="picture media" src="${item.image}" alt="${item.title}" width="320">
+                        <p>${item.description}</p>
+                    </div>
+                `;
+            } else if (item.video) {
+                albumHTML += `
+                    <div class="album-item">
+                        <h2>${item.title}</h2>
+                        <button onclick="toggleMedia(${index})">Show Video</button>
+                        <video class="video media" width="320" height="240" controls>
+                            <source src="${item.video}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p>${item.description}</p>
+                    </div>
+                `;
+            }
+        });
+        albumContainer.innerHTML = albumHTML;
+    }
+
+    // Function to toggle media visibility
+    function toggleMedia(index) {
+        const mediaElements = document.querySelectorAll('.media');
+        mediaElements.forEach(media => {
+            media.style.display = 'none';
+        });
+
+        const mediaToShow = document.querySelectorAll('.media')[index];
+        mediaToShow.style.display = 'block';
+    }
+
+    // Call the function to display the album
+    displayAlbum();
+</script>
+
+</body>
+</html>
